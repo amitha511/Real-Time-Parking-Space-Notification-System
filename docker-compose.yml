@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  flask-app:
+    build: ./app
+    container_name: flask
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./app/.env  # Adjust the path to your .env file if necessary
+
+
